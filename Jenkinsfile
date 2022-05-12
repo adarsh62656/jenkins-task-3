@@ -1,6 +1,6 @@
 def tagid = null
 pipeline{
-    agent any
+    agent none
     stages{
         stage("Input")
         {
