@@ -37,7 +37,7 @@ pipeline{
         }
         stage("CLEANUP"){
             steps{
-            sh "docker image prune -a"
+            sh "docker image prune -a --force"
             }
         }
     }
