@@ -5,8 +5,18 @@ pipeline{
         {
             steps{
                 script{
-                env.YourTag = input  message: 'What are we deploying today?',ok : 'Deploy',id :'tag_id',
-                                        parameters:[description: 'Select a tag for this build', name: 'TAG']
+                    properties([
+                        parameters([
+                            text(
+                                defaultValue: '''
+                                this is a multi-line 
+                                string parameter example
+                                ''', 
+                                 name: 'MULTI-LINE-STRING'
+                            )
+                        ])
+                    ])
+                
                 }
             }
         }
