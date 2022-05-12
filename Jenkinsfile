@@ -24,13 +24,14 @@ pipeline{
         }
         stage("Approval"){
             agent none
-            
-            script {
-                userInput = input(id: 'Proceed1', message: 'Promote build?', parameters: [[$class: 'BooleanParameterDefinition', defaultValue: true, description: '', name: 'Please confirm you agree with this']])
-                echo 'userInput: ' + userInput
-                if(userInput == true) {
-                } else {
-                    echo "Action was aborted."
+            steps{
+                script {
+                    userInput = input(id: 'Proceed1', message: 'Promote build?', parameters: [[$class: 'BooleanParameterDefinition', defaultValue: true, description: '', name: 'Please confirm you agree with this']])
+                    echo 'userInput: ' + userInput
+                    if(userInput == true) {
+                    } else {
+                        echo "Action was aborted."
+                    }
                 }
             }
         }
