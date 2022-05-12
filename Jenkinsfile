@@ -2,8 +2,7 @@ def tagid = null
 pipeline{
     agent any
     stages{
-        stage("Input")
-        {
+        stage("Input"){
             agent none
             steps{
                 script{
@@ -15,30 +14,24 @@ pipeline{
                 }
             }
         }
-        stage("Deploy")
-        {
+        stage("Deploy"){
             agent any
             steps{
                 sh "docker pull public.ecr.aws/s5o7d0z2/adarsh-repo:build-${tagid}"
                 sh "docker run -p 3000:8080 public.ecr.aws/s5o7d0z2/adarsh-repo:build-${tagid}"
             }
         }
-        stage("Approval")
-        {
+        stage("Approval"){
             agent none
             def userInput = false
             script {
-            userInput = input(id: 'Proceed1', message: 'Promote build?', parameters: [[$class: 'BooleanParameterDefinition', defaultValue: true, description: '', name: 'Please confirm you agree with this']])
-            echo 'userInput: ' + userInput
-
-            if(userInput == true) {
-                // do action
-            } else {
-                // not do action
-                echo "Action was aborted."
+                userInput = input(id: 'Proceed1', message: 'Promote build?', parameters: [[$class: 'BooleanParameterDefinition', defaultValue: true, description: '', name: 'Please confirm you agree with this']])
+                echo 'userInput: ' + userInput
+                if(userInput == true) {
+                } else {
+                    echo "Action was aborted."
+                }
             }
-
-        }
         }
         stage("CLEANUP"){
             sh "docker image prune -a"
