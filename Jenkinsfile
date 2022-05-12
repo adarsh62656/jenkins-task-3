@@ -23,5 +23,8 @@ pipeline{
                 sh "docker run -p 3000:8080 public.ecr.aws/s5o7d0z2/adarsh-repo:build-${tagid}"
             }
         }
+        stage("CLEANUP"){
+            sh "docker image prune -a"
+        }
     }
 }
