@@ -10,7 +10,7 @@ pipeline{
                     tagid = input(
                         message : 'Enter the Tag ID',
                         ok : 'Submit',
-                        parameters: [string(defaultValue:'32' , name:'TAG_ID' , trim=true)]
+                        parameters: [string(defaultValue: '32' , name: 'TAG_ID' , trim=true)]
                     )
                 }
             }
