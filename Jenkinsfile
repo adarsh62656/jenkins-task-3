@@ -1,3 +1,4 @@
+def tagid = null
 pipeline{
     agent any
     stages{
@@ -5,18 +6,11 @@ pipeline{
         {
             steps{
                 script{
-                    properties([
-                        parameters([
-                            text(
-                                defaultValue: '''
-                                this is a multi-line 
-                                string parameter example
-                                ''', 
-                                 name: 'MULTI-LINE-STRING'
-                            )
-                        ])
-                    ])
-                
+                    tagid = input(
+                        message : 'Enter the Tag ID',
+                        ok : 'Submit',
+                        parameters: [string(defaultValue:'32' , name: 'TAG_ID' , trim=true)]
+                    )
                 }
             }
         }
