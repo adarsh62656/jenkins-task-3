@@ -22,7 +22,7 @@ pipeline{
             agent any
             steps{
                 sh "docker pull public.ecr.aws/s5o7d0z2/adarsh-repo:build-${tagid}"
-                sh "docker run -p 3000:8080 public.ecr.aws/s5o7d0z2/adarsh-repo"
+                sh "docker run -p 3000:8080 public.ecr.aws/s5o7d0z2/adarsh-repo:build-${tagid}"
             }
         }
     }
