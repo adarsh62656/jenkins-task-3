@@ -18,7 +18,7 @@ pipeline{
         stage("Deploy"){
             agent any
             steps{
-                sh "docker conainer rm -f spring-container"
+                sh "docker container rm -f spring-container"
                 sh "docker pull public.ecr.aws/s5o7d0z2/adarsh-repo:build-${tagid}"
                 sh "docker run -d -p 3000:8080 --name spring-container public.ecr.aws/s5o7d0z2/adarsh-repo:build-${tagid}"
             }
