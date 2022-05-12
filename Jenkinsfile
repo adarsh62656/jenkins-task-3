@@ -1,4 +1,5 @@
 def tagid = null
+def userInput = false
 pipeline{
     agent any
     stages{
@@ -23,7 +24,7 @@ pipeline{
         }
         stage("Approval"){
             agent none
-            def userInput = false
+            
             script {
                 userInput = input(id: 'Proceed1', message: 'Promote build?', parameters: [[$class: 'BooleanParameterDefinition', defaultValue: true, description: '', name: 'Please confirm you agree with this']])
                 echo 'userInput: ' + userInput
@@ -34,7 +35,9 @@ pipeline{
             }
         }
         stage("CLEANUP"){
+            steps{
             sh "docker image prune -a"
+            }
         }
     }
 }
