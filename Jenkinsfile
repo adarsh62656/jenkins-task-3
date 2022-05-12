@@ -1,6 +1,6 @@
 def tagid = null
 pipeline{
-    agent none
+    agent any
     stages{
         stage("Input")
         {
@@ -13,7 +13,14 @@ pipeline{
                         parameters : [string(defaultValue: '32' , name: 'TAG_ID')]
                     )
                 }
+                sh "docker pull public.ecr.aws/s5o7d0z2/adarsh-repo:build-${tagid}"
+                sh "docker run -p 3000:8080 public.ecr.aws/s5o7d0z2/adarsh-repo"
+            }
+        }
+        stage("Deploy")
+        {
             agent any
+            steps{
                 sh "docker pull public.ecr.aws/s5o7d0z2/adarsh-repo:build-${tagid}"
                 sh "docker run -p 3000:8080 public.ecr.aws/s5o7d0z2/adarsh-repo"
             }
